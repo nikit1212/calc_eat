@@ -9,6 +9,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,9 +23,10 @@ import {MatSelectModule} from '@angular/material/select';
     MatFormFieldModule,
     MatRadioModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    FormsModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

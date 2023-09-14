@@ -9,6 +9,18 @@ interface ICalc {
   check: string;
 }
 
+function unique(arr: any[]) {
+  let result: ICalc[] = [];
+
+  for (let str of arr) {
+    if (!result.includes(str.date)) {
+      result.push(str.date);
+    }
+  }
+
+  return result;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -21,6 +33,8 @@ export class AppComponent implements OnInit {
   @ViewChild('ogr') ogr!: any;
 
   calcList: ICalc[] = [];
+  preparedCalcList: ICalc[] = [];
+  uniqueMas: ICalc[] = [];
   typeEat: string = '';
 
   ngOnInit(): void {
@@ -55,6 +69,15 @@ export class AppComponent implements OnInit {
     this.typeEat = e.value;
   }
 
+  listCurentDate(event: any): void {
+    this.preparedCalcList = [];
+    this.calcList.forEach(el => { 
+      if (el.date === event.value) {
+        this.preparedCalcList.push(el);
+      }
+    });
+  }
+
   addOgr(): void {
     this.calcList = this.calcList.map((el) => {
       return {...el, ogr: this.ogr.nativeElement.value}
@@ -81,6 +104,7 @@ export class AppComponent implements OnInit {
     const list = localStorage.getItem('list');
     if (list) {
       this.calcList = JSON.parse(list);
+      this.uniqueMas = unique(this.calcList);
     }
   }
 }

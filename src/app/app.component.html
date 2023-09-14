@@ -1,7 +1,15 @@
 <div class="calc">
   <mat-card class="calc_list">
     <mat-card-content>
-      <mat-card *ngFor="let elem of calcList">
+      <mat-form-field>
+        <mat-label>Выберите дату</mat-label>
+        <mat-select (selectionChange)="listCurentDate($event)">
+          <mat-option *ngFor="let el of uniqueMas" [value]="el">
+            {{el}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-card *ngFor="let elem of preparedCalcList">
         <mat-card-content>
           <div>Дата: {{elem.date}}</div>
           <div>Название блюда: {{elem.title}}</div>
