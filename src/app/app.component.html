@@ -3,7 +3,7 @@
     <mat-card-content>
       <mat-form-field>
         <mat-label>Выберите дату</mat-label>
-        <mat-select (selectionChange)="listCurentDate($event)">
+        <mat-select (selectionChange)="listSelectedDate($event)">
           <mat-option *ngFor="let el of uniqueMas" [value]="el">
             {{el}}
           </mat-option>
@@ -37,8 +37,11 @@
       <mat-card-content>
         <div class="calc_add_wrapper">
           <mat-form-field>
-            <mat-label>Введите дату</mat-label>
-            <input matInput #date>
+            <mat-label>Выберите дату</mat-label>
+            <input matInput [matDatepicker]="picker" #date>
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Наименование блюда</mat-label>

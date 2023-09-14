@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 
 interface ICalc {
-  date: string;
+  date: Date;
   title: string;
   kal: number;
   type: string;
@@ -19,6 +19,16 @@ function unique(arr: any[]) {
   }
 
   return result;
+}
+
+function updList(calcList: any[], date: Date) {
+  let preparedCalcList: ICalc[] = [];
+  calcList.forEach(el => { 
+    if (el.date === date) {
+      preparedCalcList.push(el);
+    }
+  });
+  return preparedCalcList;
 }
 
 @Component({
@@ -51,31 +61,30 @@ export class AppComponent implements OnInit {
       check: 'Нет превышения',
     }
     this.calcList.push(data);
+    this.uniqueMas = unique(this.calcList);
     this.checkOgr(data.date);
     this.setCache();
+    this.preparedCalcList = updList(this.calcList, data.date);
   }
 
   isDisableAdd(): boolean {
     return !this.date?.nativeElement.value || !this.title?.nativeElement.value || !this.kal?.nativeElement.value || !this.typeEat;
   }
 
-  delCalcElem(delTitle: string, delDate: string): void {
+  delCalcElem(delTitle: string, delDate: Date): void {
     this.calcList = this.calcList.filter((el) => el.title !== delTitle);
+    this.uniqueMas = unique(this.calcList);
     this.checkOgr(delDate);
     this.setCache();
+    this.preparedCalcList = updList(this.calcList, delDate);
   }
 
   onChange(e: any): void {
     this.typeEat = e.value;
   }
 
-  listCurentDate(event: any): void {
-    this.preparedCalcList = [];
-    this.calcList.forEach(el => { 
-      if (el.date === event.value) {
-        this.preparedCalcList.push(el);
-      }
-    });
+  listSelectedDate(event: any): void {
+    this.preparedCalcList = updList(this.calcList, event.value)
   }
 
   addOgr(): void {
@@ -84,7 +93,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  checkOgr(date: string): void {
+  checkOgr(date: Date): void {
     let sum = 0;
     this.calcList.forEach(el => { 
       if (el.date === date) {

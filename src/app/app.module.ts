@@ -10,6 +10,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {FormsModule} from '@angular/forms';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import {FormsModule} from '@angular/forms';
     MatRadioModule,
     MatButtonModule,
     MatSelectModule,
-    FormsModule, 
+    FormsModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
