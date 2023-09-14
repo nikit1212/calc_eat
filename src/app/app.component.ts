@@ -6,7 +6,7 @@ interface ICalc {
   kal: number;
   type: string;
   ogr: string;
-  check: boolean;
+  check: string;
 }
 
 @Component({
@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
       kal: this.kal.nativeElement.value,
       type: this.typeEat,
       ogr: this.calcList[0]?.ogr,
-      check: true,
+      check: 'Нет превышения',
     }
     this.calcList.push(data);
     this.checkOgr(data.date);
@@ -69,7 +69,7 @@ export class AppComponent implements OnInit {
       }
     });
     this.calcList = this.calcList.map((el) => {
-      return {...el, check: el.date === date && sum < +el.ogr ? false : el.check};
+      return {...el, check: el.date === date && sum > +el.ogr ? 'Превышение' : 'Нет превышения'};
     })
   }
 

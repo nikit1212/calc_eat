@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "my-project": {
+    "calc_eat": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/my-project",
+            "outputPath": "dist/calc_eat",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -61,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "my-project:build:production"
+              "browserTarget": "calc_eat:build:production"
             },
             "development": {
-              "browserTarget": "my-project:build:development"
+              "browserTarget": "calc_eat:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +72,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "my-project:build"
+            "browserTarget": "calc_eat:build"
           }
         },
         "test": {

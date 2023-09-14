@@ -3,12 +3,12 @@
     <mat-card-content>
       <mat-card *ngFor="let elem of calcList">
         <mat-card-content>
-          <div>{{elem.date}}</div>
-          <div>{{elem.title}}</div>
-          <div>{{elem.kal}}</div>
-          <div>{{elem.type}}</div>
-          <div>{{elem.ogr}}</div>
-          <div>{{elem.check}}</div>
+          <div>Дата: {{elem.date}}</div>
+          <div>Название блюда: {{elem.title}}</div>
+          <div>Калорийность: {{elem.kal}}</div>
+          <div>Прием пищи: {{elem.type}}</div>
+          <div>Ограничение: {{elem.ogr}}</div>
+          <div>Проверка: {{elem.check}}</div>
           <button mat-raised-button (click)="delCalcElem(elem.title, elem.date)">Удалить</button>
         </mat-card-content>
       </mat-card>
@@ -16,33 +16,37 @@
   </mat-card>
 
   <div>
-    <mat-card-content>
-      <mat-form-field>
-        <mat-label>Введите огр.</mat-label>
-        <input matInput #ogr>
-      </mat-form-field>
-      <button mat-raised-button (click)="addOgr()">Сохранить</button>
+    <mat-card-content class="form_ogr">
+      <div class="form_ogr_wrapper">
+        <mat-form-field>
+          <mat-label>Введите ограничение</mat-label>
+          <input matInput #ogr>
+        </mat-form-field>
+        <button mat-raised-button (click)="addOgr()">Сохранить</button>
+      </div>
     </mat-card-content>
     <mat-card class="calc_add">
       <mat-card-content>
-        <mat-form-field>
-          <mat-label>Введите дату</mat-label>
-          <input matInput #date>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Наименование блюда</mat-label>
-          <input matInput #title>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Каллории</mat-label>
-          <input matInput #kal>
-        </mat-form-field>
-        <mat-radio-group aria-label="Select an option" (change)="onChange($event)">
-          <mat-radio-button value="Завтрак">Завтрак</mat-radio-button>
-          <mat-radio-button value="Обед">Обед</mat-radio-button>
-          <mat-radio-button value="Ужин">Ужин</mat-radio-button>
-        </mat-radio-group>
-        <button mat-raised-button (click)="addCalcElem()" [disabled]="isDisableAdd()">Добавить</button>
+        <div class="calc_add_wrapper">
+          <mat-form-field>
+            <mat-label>Введите дату</mat-label>
+            <input matInput #date>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Наименование блюда</mat-label>
+            <input matInput #title>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Калории</mat-label>
+            <input matInput #kal>
+          </mat-form-field>
+          <mat-radio-group class="calc_add_wrapper_radio" (change)="onChange($event)">
+            <mat-radio-button value="Завтрак">Завтрак</mat-radio-button>
+            <mat-radio-button value="Обед">Обед</mat-radio-button>
+            <mat-radio-button value="Ужин">Ужин</mat-radio-button>
+          </mat-radio-group>
+          <button mat-raised-button (click)="addCalcElem()" [disabled]="isDisableAdd()">Добавить</button>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>

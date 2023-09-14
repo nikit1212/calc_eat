@@ -6,8 +6,25 @@
 .calc_add {
     width: 400px;
     margin-left: 16px;
+    margin-top: 16px;
 }
 
 .calc_list {
     width: 100%;
+}
+
+.form_ogr_wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.calc_add_wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.calc_add_wrapper_radio {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
 }
