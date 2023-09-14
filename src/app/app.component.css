@@ -1,0 +1,13 @@
+.calc {
+    display: flex;
+    width: 100%;
+}
+
+.calc_add {
+    width: 400px;
+    margin-left: 16px;
+}
+
+.calc_list {
+    width: 100%;
+}
