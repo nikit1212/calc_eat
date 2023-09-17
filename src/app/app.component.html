@@ -1,64 +1,50 @@
 <div class="calc">
-  <mat-card class="calc_list">
-    <mat-card-content>
-      <mat-form-field>
-        <mat-label>Выберите дату</mat-label>
-        <mat-select (selectionChange)="listSelectedDate($event)">
-          <mat-option *ngFor="let el of uniqueMas" [value]="el">
-            {{el}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-card *ngFor="let elem of preparedCalcList">
-        <mat-card-content>
-          <div>Дата: {{elem.date}}</div>
-          <div>Название блюда: {{elem.title}}</div>
-          <div>Калорийность: {{elem.kal}}</div>
-          <div>Прием пищи: {{elem.type}}</div>
-          <div>Ограничение: {{elem.ogr}}</div>
-          <div>Проверка: {{elem.check}}</div>
-          <button mat-raised-button (click)="delCalcElem(elem.title, elem.date)">Удалить</button>
-        </mat-card-content>
-      </mat-card>
-    </mat-card-content>
-  </mat-card>
-
-  <div>
-    <mat-card-content class="form_ogr">
-      <div class="form_ogr_wrapper">
-        <mat-form-field>
-          <mat-label>Введите ограничение</mat-label>
-          <input matInput #ogr>
-        </mat-form-field>
-        <button mat-raised-button (click)="addOgr()">Сохранить</button>
-      </div>
-    </mat-card-content>
-    <mat-card class="calc_add">
-      <mat-card-content>
-        <div class="calc_add_wrapper">
-          <mat-form-field>
-            <mat-label>Выберите дату</mat-label>
-            <input matInput [matDatepicker]="picker" #date>
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Наименование блюда</mat-label>
-            <input matInput #title>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Калории</mat-label>
-            <input matInput #kal>
-          </mat-form-field>
-          <mat-radio-group class="calc_add_wrapper_radio" (change)="onChange($event)">
-            <mat-radio-button value="Завтрак">Завтрак</mat-radio-button>
-            <mat-radio-button value="Обед">Обед</mat-radio-button>
-            <mat-radio-button value="Ужин">Ужин</mat-radio-button>
-          </mat-radio-group>
-          <button mat-raised-button (click)="addCalcElem()" [disabled]="isDisableAdd()">Добавить</button>
-        </div>
+  <mat-drawer-container class="calc-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+      <form-ogr (ogrItemEvent)="ogrCalcElem($event)"></form-ogr>
+      <form-add (addItemEvent)="addCalcElem($event)"></form-add>
+    </mat-drawer>
+    <mat-card class="calc_card">
+      <button class="burger" type="button" mat-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-card-content class="content_wrapper">      
+        <table mat-table [dataSource]="preparedCalcList">
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef>Дата</th>
+            <td mat-cell *matCellDef="let element">{{element.date}}</td>
+          </ng-container>
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef>Блюдо</th>
+            <td mat-cell *matCellDef="let element">{{element.title}}</td>
+          </ng-container>
+          <ng-container matColumnDef="kal">
+            <th mat-header-cell *matHeaderCellDef>Калории</th>
+            <td mat-cell *matCellDef="let element">{{element.kal}}</td>
+          </ng-container>
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef>Прием пищи</th>
+            <td mat-cell *matCellDef="let element">{{element.type}}</td>
+          </ng-container>
+          <ng-container matColumnDef="ogr">
+            <th mat-header-cell *matHeaderCellDef>Ограничение</th>
+            <td mat-cell *matCellDef="let element">{{element.ogr}}</td>
+          </ng-container>
+          <ng-container matColumnDef="check">
+            <th mat-header-cell *matHeaderCellDef>Проверка</th>
+            <td mat-cell *matCellDef="let element">{{element.check ? 'Нет превышения' : 'Превышение'}}</td>
+          </ng-container>
+          <ng-container matColumnDef="delButton">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-raised-button (click)="delCalcElem(element.id, element.date)">Удалить</button>
+            </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
       </mat-card-content>
     </mat-card>
-  </div>
+  </mat-drawer-container>
 </div>

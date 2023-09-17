@@ -1,0 +1,18 @@
+<mat-card class="form_ogr">
+  <mat-card-content>
+    <form [formGroup]="formOgr" class="form_ogr_wrapper">
+      <mat-form-field >
+        <mat-label>Введите ограничение</mat-label>
+        <input matInput formControlName="ogr">
+      </mat-form-field>
+      <mat-form-field >
+        <mat-label>Дата ограничения</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <button class="buttOgr" mat-raised-button (click)="ogrCalcElem()">Сохранить</button>
+    </form>
+  </mat-card-content>
+</mat-card>

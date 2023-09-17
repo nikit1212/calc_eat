@@ -1,0 +1,16 @@
+.form_ogr {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 16px;
+    background-color: rgb(255, 255, 242);
+}
+
+.form_ogr_wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttOgr {
+    margin-top: 10px;
+}
+
